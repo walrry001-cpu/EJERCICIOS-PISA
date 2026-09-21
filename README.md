@@ -1,17 +1,19 @@
-# Simulacro PISA · Áreas de terrenos de Cajamarca (20 ejercicios)
+# Simulacro PISA · Áreas de terrenos de Cajamarca (20 ejercicios, con portada)
 
 Cuadernillo interactivo con 20 problemas de área contextualizados en Cajamarca,
 redactados al estilo de las pruebas PISA, presentados uno a la vez (con
-navegación Anterior/Siguiente y puntos de progreso). Cada ejercicio incluye un
-cronómetro configurable por el propio estudiante, una pregunta de estrategia
-(opción múltiple) y una pregunta de cálculo. Al terminar los 20 ejercicios, el
-estudiante puede generar un PDF con su hoja de resultados.
+navegación Anterior/Siguiente y puntos de progreso). Incluye una portada
+ilustrada de Cajamarca incrustada en el propio archivo. Cada ejercicio tiene
+un cronómetro configurable por el estudiante, una pregunta de estrategia y
+una de cálculo. Al terminar los 20 ejercicios, se puede generar un PDF con la
+hoja de resultados.
 
 **Autor:** Prof. Walter Rodrigo Arribasplata Chavarry
 
 ## Archivos
 
-- `index.html` — la página completa (autocontenida, no requiere backend).
+- `index.html` — página completa y autocontenida (la portada va incrustada
+  en base64 dentro del propio HTML, no depende de ningún archivo externo).
 - `favicon.ico`, `favicon-16.png`, `favicon-32.png`, `favicon-48.png`,
   `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` — íconos generados
   a partir del logotipo WRACh.
@@ -27,8 +29,7 @@ estudiante puede generar un PDF con su hoja de resultados.
 
 ## Notas técnicas
 
-- Usa [jsPDF](https://github.com/parzibyte/jsPDF) (cargado desde
-  `cdnjs.cloudflare.com`) solo para generar el PDF de resultados; no se envía
-  ningún dato a servidores externos.
+- Usa jsPDF (cargado desde `cdnjs.cloudflare.com`) solo para generar el PDF
+  de resultados; no se envía ningún dato a servidores externos.
 - Sitio 100% estático, compatible con GitHub Pages, Netlify, Vercel o
   cualquier hosting de archivos estáticos.
