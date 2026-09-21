@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulacro PISA · Áreas de terrenos de Cajamarca</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E4;
+    --paper-2:#EFE7D3;
+    --ink:#2E2A24;
+    --ink-soft:#5B5347;
+    --green:#3F6B4A;
+    --green-soft:#E4EEE3;
+    --gold:#C89B3C;
+    --gold-soft:#F6ECD3;
+    --terracotta:#B0563A;
+    --terracotta-soft:#F6E4DD;
+    --sky:#5D89A8;
+    --sky-soft:#E3EEF3;
+    --line:#DCD2B9;
+    --card-radius:6px;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#211F1A; --paper-2:#2A281F; --ink:#EFE8D6; --ink-soft:#BEB39B;
+      --green-soft:#233026; --gold-soft:#332A16; --terracotta-soft:#332019; --sky-soft:#1C2A32;
+      --line:#443F30;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#211F1A; --paper-2:#2A281F; --ink:#EFE8D6; --ink-soft:#BEB39B;
+    --green-soft:#233026; --gold-soft:#332A16; --terracotta-soft:#332019; --sky-soft:#1C2A32;
+    --line:#443F30;
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans',system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ---------- Header ---------- */
+  header.hero{
+    background:var(--green);
+    padding:28px 20px 0;
+    color:#fff;
+  }
+  .hero-inner{max-width:760px;margin:0 auto;padding-bottom:26px;}
+  .eyebrow-row{display:flex;align-items:center;gap:10px;font-size:13px;color:#E4EEE3;margin-bottom:10px;}
+  .eyebrow-row svg{flex:none;}
+  h1.title{font-size:clamp(26px,6vw,38px);font-weight:600;margin:0 0 14px;line-height:1.12;}
+  .subtitle{font-size:15px;color:#E4EEE3;max-width:60ch;margin:0 0 14px;}
+  .subtitle:last-of-type{margin-bottom:0;}
+  .andes{display:block;width:100%;height:auto;}
+  .author-strip{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--card-radius);
+    padding:12px 16px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:22px 0 26px;
+  }
+  .author-strip strong{color:var(--ink);}
+
+  /* ---------- Ficha del estudiante ---------- */
+  .ficha{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--card-radius);
+    padding:18px 18px 20px;
+    margin:0 0 26px;
+  }
+  .ficha h2{font-size:17px;margin:0 0 4px;}
+  .ficha p{font-size:13.5px;color:var(--ink-soft);margin:0 0 14px;}
+  .ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .ficha-grid .full{grid-column:1 / -1;}
+  .ficha label{display:block;font-size:12px;color:var(--ink-soft);margin-bottom:4px;}
+  .ficha input{
+    width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:4px;
+    font:inherit;font-size:14px;background:var(--paper);color:var(--ink);
+  }
+  .ficha input:focus{outline:2px solid var(--sky);outline-offset:1px;}
+
+  /* ---------- Instrucciones ---------- */
+  .instrucciones{
+    border-left:3px solid var(--sky);
+    background:var(--sky-soft);
+    padding:14px 16px;
+    border-radius:0 4px 4px 0;
+    font-size:13.5px;
+    margin:0 0 24px;
+  }
+  .instrucciones h2{font-size:15px;margin:0 0 8px;}
+  .instrucciones ol{margin:0;padding-left:19px;}
+  .instrucciones li{margin-bottom:5px;}
+
+  /* ---------- Navegación paso a paso ---------- */
+  .quiz-nav{
+    position:sticky; top:env(safe-area-inset-top,0px);
+    z-index:5;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:10px 20px;
+    margin:0 -20px 26px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .quiz-nav .nav-info{flex:1;text-align:center;min-width:0;}
+  #nav-label{font-size:13px;font-weight:600;display:block;margin-bottom:6px;}
+  .nav-dots{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;}
+  .nav-dot{
+    width:9px;height:9px;border-radius:50%;background:var(--line);border:none;padding:0;cursor:pointer;
+  }
+  .nav-dot.done{background:var(--green);}
+  .nav-dot.current{outline:2px solid var(--sky);outline-offset:2px;}
+  .quiz-nav .btn{white-space:nowrap;font-size:12.5px;padding:8px 12px;}
+
+  /* ---------- Tarjeta de ejercicio ---------- */
+  .slide{display:none;}
+  .slide.active{display:block;}
+  .ejercicio{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--card-radius);
+    margin-bottom:26px;
+    overflow:hidden;
+  }
+  .ej-head{
+    display:flex; align-items:flex-start; gap:14px;
+    padding:18px 18px 4px;
+  }
+  .ej-num{
+    flex:none; width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:16px;
+    color:#fff;
+  }
+  .ej-head h3{font-size:18px;margin:2px 0 4px;}
+  .ej-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:2px;}
+  .ej-body{padding:6px 18px 18px;}
+  .contexto{font-size:14.5px;margin:6px 0 16px;}
+  .diagrama-wrap{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:10px;
+    margin:0 0 18px;
+    display:flex;justify-content:center;
+  }
+  .diagrama-wrap svg{max-width:100%;height:auto;display:block;}
+
+  /* ---------- Cronómetro ---------- */
+  .timer-box{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    background:var(--paper);border:1px dashed var(--line);border-radius:4px;
+    padding:10px 12px; margin:0 0 18px;
+  }
+  .timer-display{
+    font-family:'Fraunces',serif;font-size:22px;font-weight:600;
+    min-width:64px;text-align:center;
+  }
+  .timer-box.time-up .timer-display{color:var(--terracotta);}
+  .timer-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .timer-controls label{font-size:12px;color:var(--ink-soft);}
+  .timer-controls input[type=number]{
+    width:56px;padding:5px 6px;border:1px solid var(--line);border-radius:4px;
+    font:inherit;background:var(--paper);color:var(--ink);
+  }
+  button{font:inherit;cursor:pointer;}
+  .btn{
+    border:1px solid var(--line);background:var(--paper);color:var(--ink);
+    padding:7px 12px;border-radius:4px;font-size:12.5px;font-weight:600;
+    transition:background .15s ease;
+  }
+  .btn:hover{background:var(--paper-2);}
+  .btn-primary{background:var(--green);border-color:var(--green);color:#fff;}
+  .btn-primary:hover{background:#345a3d;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .time-up-note{font-size:12px;color:var(--terracotta);font-weight:600;}
+
+  /* ---------- Preguntas ---------- */
+  .pregunta{margin-bottom:16px;}
+  .pregunta > p.enun{font-size:14px;font-weight:600;margin:0 0 10px;}
+  .opciones{display:grid;gap:8px;}
+  .opcion{
+    display:flex;align-items:flex-start;gap:9px;
+    border:1px solid var(--line);border-radius:4px;
+    padding:9px 11px;font-size:13.5px;background:var(--paper);
+    cursor:pointer;
+  }
+  .opcion:hover{border-color:var(--sky);}
+  .opcion input{margin-top:3px;flex:none;}
+  .respuesta-num{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .respuesta-num input[type=number]{
+    width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;
+    font:inherit;font-size:14px;background:var(--paper);color:var(--ink);
+  }
+  .respuesta-num span{font-size:13.5px;color:var(--ink-soft);}
+
+  .verificar-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px;}
+
+  .feedback{
+    margin-top:14px;border-radius:4px;padding:12px 14px;font-size:13.5px;display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{background:var(--green-soft);border:1px solid var(--green);}
+  .feedback.bad{background:var(--terracotta-soft);border:1px solid var(--terracotta);}
+  .feedback .fila{display:flex;gap:6px;margin-bottom:4px;}
+  .feedback .fila b{flex:none;}
+  .explicacion{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);color:var(--ink-soft);}
+
+  .slide-nav-inline{display:flex;justify-content:space-between;gap:10px;margin-top:4px;}
+
+  /* ---------- Resultado final ---------- */
+  .resultado-final{
+    background:var(--green);
+    color:#fff;
+    border-radius:var(--card-radius);
+    padding:26px 22px;
+    text-align:center;
+    margin-top:10px;
+  }
+  .resultado-final h2{font-size:20px;margin:0 0 6px;color:#fff;}
+  .resultado-final .puntaje{
+    font-family:'Fraunces',serif;font-size:44px;font-weight:700;margin:10px 0 6px;
+  }
+  .resultado-final p{color:#E4EEE3;font-size:14px;max-width:48ch;margin:0 auto 6px;}
+  .resultado-final .btn{margin-top:14px;background:#fff;color:var(--green);border-color:#fff;}
+  .tabla-resumen{
+    margin-top:18px;text-align:left;background:rgba(255,255,255,.08);
+    border-radius:4px;overflow:hidden;font-size:12.5px;
+  }
+  .tabla-resumen table{width:100%;border-collapse:collapse;}
+  .tabla-resumen th,.tabla-resumen td{padding:7px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,.15);}
+  .tabla-resumen th{color:#E4EEE3;font-weight:600;}
+
+  footer{
+    text-align:center;font-size:12px;color:var(--ink-soft);
+    padding:30px 20px 10px;
+  }
+
+  @media (max-width:480px){
+    .ficha-grid{grid-template-columns:1fr;}
+    .ej-head{gap:10px;}
+    .ej-num{width:28px;height:28px;font-size:14px;}
+    .quiz-nav .btn{font-size:11.5px;padding:7px 9px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow-row">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 20l5-9 4 5 3-6 6 10H3z" fill="#F6ECD3"/></svg>
+      <span>Cuadernillo de práctica · Matemática · Magnitudes y medida</span>
+    </div>
+    <h1 class="title">Áreas de terrenos de Cajamarca</h1>
+    <p class="subtitle">Veinte situaciones tomadas de la vida real de Cajamarca —chacras, huertos, biohuertos, corrales, estanques de trucha, plazas y espacios escolares— redactadas al estilo de las pruebas PISA, para que aprendas a leer un contexto, interpretar un diagrama y resolver problemas de área con tus propias palabras y cálculos.</p>
+    <p class="subtitle">El cuadernillo avanza ejercicio por ejercicio: resuelves uno, compruebas tu respuesta y pasas al siguiente con el botón "Siguiente". Tú decides cuánto tiempo usar en cada uno con el cronómetro, y al terminar los veinte podrás generar un PDF con tu hoja de resultados.</p>
+  </div>
+  <svg class="andes" viewBox="0 0 760 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 70 L0 40 L90 10 L150 34 L230 6 L300 38 L370 16 L440 40 L520 12 L600 36 L680 18 L760 40 L760 70 Z" fill="#F6F1E4"/>
+    <path d="M0 70 L0 50 L100 30 L180 46 L260 26 L340 48 L420 30 L500 50 L590 28 L670 46 L760 32 L760 70 Z" fill="#EFE7D3" opacity="0.7"/>
+  </svg>
+</header>
+
+<div class="wrap">
+
+  <div class="author-strip">
+    Material elaborado por el profesor <strong>Walter Rodrigo Arribasplata Chavarry</strong> como preparación para futuras evaluaciones tipo PISA.
+  </div>
+
+  <section class="ficha">
+    <h2>Ficha del estudiante</h2>
+    <p>Completa tus datos antes de comenzar. Esta información solo se usa para tu hoja de resultados al final.</p>
+    <div class="ficha-grid">
+      <div>
+        <label for="f-nombre">Nombres y apellidos</label>
+        <input id="f-nombre" type="text" placeholder="Escribe tu nombre">
+      </div>
+      <div>
+        <label for="f-grado">Grado y sección</label>
+        <input id="f-grado" type="text" placeholder="Ej. 5.° A">
+      </div>
+      <div class="full">
+        <label for="f-ie">Institución educativa</label>
+        <input id="f-ie" type="text" placeholder="Nombre de tu colegio">
+      </div>
+    </div>
+  </section>
+
+  <section class="instrucciones">
+    <h2>Instrucciones del simulacro</h2>
+    <ol>
+      <li>Los 20 ejercicios se presentan de uno en uno. Antes de iniciar el cronómetro de cada uno, escribe cuántos minutos vas a usar (tú decides el tiempo del que dispones) y pulsa <b>Iniciar</b>.</li>
+      <li>Lee el contexto y observa el diagrama con cuidado: los datos que necesitas están ahí.</li>
+      <li>Responde primero la pregunta de estrategia y luego calcula el área, y pulsa <b>Comprobar</b> para ver la explicación.</li>
+      <li>Usa <b>Siguiente</b> para avanzar al próximo ejercicio; puedes volver con <b>Anterior</b> o tocando los puntos de arriba.</li>
+      <li>Al terminar los 20 ejercicios llegarás a tu hoja de resultados y podrás generar el PDF.</li>
+    </ol>
+  </section>
+
+  <div class="quiz-nav">
+    <button class="btn" id="nav-prev">◀ Anterior</button>
+    <div class="nav-info">
+      <span id="nav-label">Ejercicio 1 de 20</span>
+      <div class="nav-dots" id="nav-dots"></div>
+    </div>
+    <button class="btn btn-primary" id="nav-next">Siguiente ▶</button>
+  </div>
+
+  <div id="ejercicios"></div>
+
+  <div class="slide" id="slide-resultado">
+    <section class="resultado-final" id="resultado-final">
+      <h2>Resultado final</h2>
+      <div class="puntaje" id="puntaje-final">—</div>
+      <p id="mensaje-final">Comprueba los 20 ejercicios para ver tu puntaje y el detalle de tu desempeño.</p>
+      <div class="tabla-resumen" id="tabla-resumen" style="display:none;">
+        <table>
+          <thead><tr><th>N.°</th><th>Tema</th><th>Estrategia</th><th>Cálculo</th><th>Tiempo usado</th></tr></thead>
+          <tbody id="tabla-resumen-body"></tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn" id="btn-recalcular">Actualizar resultado</button>
+        <button class="btn" id="btn-pdf" disabled>Generar PDF de resultados</button>
+      </div>
+      <p id="pdf-note" style="font-size:12px;color:#E4EEE3;margin-top:10px;display:none;"></p>
+    </section>
+  </div>
+
+  <footer>
+    Cuadernillo de práctica tipo PISA — Cajamarca · Elaborado por el profesor Walter Rodrigo Arribasplata Chavarry
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+
+  var TEMAS = [
+    {color:'green', bg:'var(--green-soft)'},
+    {color:'gold', bg:'var(--gold-soft)'},
+    {color:'terracotta', bg:'var(--terracotta-soft)'},
+    {color:'sky', bg:'var(--sky-soft)'}
+  ];
+
+  function colorFor(i){ return TEMAS[i % TEMAS.length]; }
+
+  // ---------- Diagramas (SVG ilustrativos, no a escala) ----------
+  function svgChacra(c){
+    return '<svg viewBox="0 0 260 180" width="260" height="180">' +
+      '<polygon points="40,20 220,20 220,160 70,160 70,110 40,110" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="14" text-anchor="middle" font-size="13" fill="var(--ink)">30 m</text>' +
+      '<text x="28" y="65" text-anchor="middle" font-size="13" fill="var(--ink)">20 m</text>' +
+      '<text x="100" y="105" text-anchor="middle" font-size="12" fill="var(--ink)">10 m</text>' +
+      '<text x="55" y="135" text-anchor="middle" font-size="12" fill="var(--ink)">5 m</text>' +
+      '</svg>';
+  }
+  function svgHuerto(c, top, left, notchW, notchH){
+    return '<svg viewBox="0 0 260 180" width="260" height="180">' +
+      '<polygon points="30,20 230,20 230,90 150,90 150,160 30,160" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="14" text-anchor="middle" font-size="13" fill="var(--ink)">'+top+' m</text>' +
+      '<text x="18" y="95" text-anchor="middle" font-size="13" fill="var(--ink)">'+left+' m</text>' +
+      '<text x="190" y="58" text-anchor="middle" font-size="12" fill="var(--ink)">'+notchW+' m</text>' +
+      '<text x="140" y="120" text-anchor="middle" font-size="12" fill="var(--ink)">'+notchH+' m</text>' +
+      '</svg>';
+  }
+  function svgBiohuerto(c, top, bottom, h){
+    return '<svg viewBox="0 0 260 160" width="260" height="160">' +
+      '<polygon points="80,20 180,20 230,140 30,140" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="14" text-anchor="middle" font-size="13" fill="var(--ink)">'+top+' m</text>' +
+      '<text x="130" y="155" text-anchor="middle" font-size="13" fill="var(--ink)">'+bottom+' m</text>' +
+      '<text x="55" y="82" text-anchor="middle" font-size="12" fill="var(--ink)">'+h+' m</text>' +
+      '</svg>';
+  }
+  function svgCorral(c){
+    return '<svg viewBox="0 0 260 170" width="260" height="170">' +
+      '<rect x="30" y="20" width="200" height="130" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<circle cx="230" cy="85" r="48" fill="var(--paper)" stroke="'+c+'" stroke-width="3"/>' +
+      '<rect x="230" y="20" width="30" height="130" fill="var(--paper)"/>' +
+      '<line x1="230" y1="20" x2="230" y2="150" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="14" text-anchor="middle" font-size="13" fill="var(--ink)">40 m</text>' +
+      '<text x="18" y="90" text-anchor="middle" font-size="13" fill="var(--ink)">20 m</text>' +
+      '<text x="232" y="88" text-anchor="middle" font-size="11" fill="var(--ink)">r = 10 m</text>' +
+      '</svg>';
+  }
+  function svgLetrero(c){
+    return '<svg viewBox="0 0 260 180" width="260" height="180">' +
+      '<polygon points="30,20 220,20 220,110 140,110 140,160 30,160" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="125" y="14" text-anchor="middle" font-size="13" fill="var(--ink)">28 m</text>' +
+      '<text x="18" y="95" text-anchor="middle" font-size="13" fill="var(--ink)">22 m</text>' +
+      '<text x="180" y="75" text-anchor="middle" font-size="12" fill="var(--ink)">10 m</text>' +
+      '<text x="130" y="135" text-anchor="middle" font-size="12" fill="var(--ink)">8 m</text>' +
+      '</svg>';
+  }
+  function svgCampo(c){
+    return '<svg viewBox="0 0 260 170" width="260" height="170">' +
+      '<polygon points="70,20 230,20 190,150 30,150" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="14" y="88" text-anchor="middle" font-size="13" fill="var(--ink)">18 m</text>' +
+      '<text x="110" y="165" text-anchor="middle" font-size="13" fill="var(--ink)">30 m</text>' +
+      '</svg>';
+  }
+  function svgJardin(c){
+    return '<svg viewBox="0 0 260 180" width="260" height="180">' +
+      '<polygon points="130,15 220,70 220,160 40,160 40,70" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="14" y="118" text-anchor="middle" font-size="13" fill="var(--ink)">18 m</text>' +
+      '<text x="130" y="175" text-anchor="middle" font-size="13" fill="var(--ink)">20 m</text>' +
+      '</svg>';
+  }
+  function svgEstanque(c){
+    return '<svg viewBox="0 0 260 170" width="260" height="170">' +
+      '<rect x="30" y="20" width="200" height="130" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<circle cx="130" cy="20" r="40" fill="var(--paper)" stroke="'+c+'" stroke-width="3"/>' +
+      '<rect x="90" y="-20" width="80" height="40" fill="var(--paper)"/>' +
+      '<line x1="90" y1="20" x2="90" y2="0" stroke="'+c+'" stroke-width="3"/>' +
+      '<line x1="170" y1="20" x2="170" y2="0" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="14" text-anchor="middle" font-size="12" fill="var(--ink)">r = 6 m</text>' +
+      '<text x="130" y="165" text-anchor="middle" font-size="13" fill="var(--ink)">24 m</text>' +
+      '<text x="18" y="88" text-anchor="middle" font-size="13" fill="var(--ink)">12 m</text>' +
+      '</svg>';
+  }
+  function svgPatio(c, top, left, notchW, notchH){
+    return '<svg viewBox="0 0 260 180" width="260" height="180">' +
+      '<polygon points="30,20 230,20 230,160 140,160 140,100 30,100" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="14" text-anchor="middle" font-size="13" fill="var(--ink)">'+top+' m</text>' +
+      '<text x="18" y="65" text-anchor="middle" font-size="13" fill="var(--ink)">'+left+' m</text>' +
+      '<text x="185" y="60" text-anchor="middle" font-size="12" fill="var(--ink)">'+notchW+' m</text>' +
+      '<text x="165" y="130" text-anchor="middle" font-size="12" fill="var(--ink)">'+notchH+' m</text>' +
+      '</svg>';
+  }
+  function svgTerreno(c, top, bottom, h){
+    return '<svg viewBox="0 0 260 160" width="260" height="160">' +
+      '<polygon points="70,20 190,20 230,140 30,140" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="14" text-anchor="middle" font-size="13" fill="var(--ink)">'+top+' m</text>' +
+      '<text x="130" y="155" text-anchor="middle" font-size="13" fill="var(--ink)">'+bottom+' m</text>' +
+      '<text x="50" y="82" text-anchor="middle" font-size="12" fill="var(--ink)">'+h+' m</text>' +
+      '</svg>';
+  }
+  function svgRectSimple(c, base, altura){
+    return '<svg viewBox="0 0 260 170" width="260" height="170">' +
+      '<rect x="35" y="25" width="190" height="120" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<text x="130" y="16" text-anchor="middle" font-size="13" fill="var(--ink)">'+base+' m</text>' +
+      '<text x="18" y="90" text-anchor="middle" font-size="13" fill="var(--ink)">'+altura+' m</text>' +
+      '</svg>';
+  }
+  function svgHexagono(c, lado, apotema){
+    return '<svg viewBox="0 0 260 200" width="260" height="200">' +
+      '<polygon points="130,20 210,65 210,145 130,190 50,145 50,65" fill="'+c+'" fill-opacity="0.25" stroke="'+c+'" stroke-width="3"/>' +
+      '<line x1="130" y1="105" x2="50" y2="65" stroke="'+c+'" stroke-width="1.5" stroke-dasharray="3,3"/>' +
+      '<line x1="130" y1="105" x2="130" y2="20" stroke="'+c+'" stroke-width="1.5" stroke-dasharray="3,3"/>' +
+      '<text x="90" y="42" text-anchor="middle" font-size="12" fill="var(--ink)">lado '+lado+' m</text>' +
+      '<text x="145" y="70" text-anchor="middle" font-size="12" fill="var(--ink)">apotema '+apotema+' m</text>' +
+      '</svg>';
+  }
+
+  var EJERCICIOS = [
+    {
+      tema:'La chacra de papa en Porcón',
+      contexto:'Un agricultor de la comunidad de Porcón, en Cajamarca, siembra papa en un terreno rectangular de 30 m de largo por 20 m de ancho. En una esquina pasa un pequeño canal de riego que ocupa un rectángulo de 10 m por 5 m donde no se puede sembrar.',
+      svg:function(c){return svgChacra(c);}, minutos:4,
+      qa:{enun:'¿Qué estrategia permite hallar el área que sí se puede sembrar?',
+        ops:['Sumar el área del rectángulo grande más el área del canal.','Restar el área del canal al área del rectángulo grande.','Multiplicar el largo por el ancho del canal solamente.','Dividir el área total entre los cuatro lados del terreno.'],
+        correcta:1, exp:'El canal “quita” terreno sembrable, así que su área se resta del rectángulo total: 30×20 − 10×5.'},
+      qb:{enun:'Calcula el área sembrable (en m²).', resp:550, tol:0, exp:'30×20 = 600 m²; 10×5 = 50 m²; 600 − 50 = 550 m².'}
+    },
+    {
+      tema:'El huerto familiar',
+      contexto:'Una familia de una zona rural de Cajamarca tiene un huerto en forma de L para sembrar hortalizas. El terreno completo mediría 25 m por 15 m, pero le falta un rectángulo de 10 m por 8 m en una esquina.',
+      svg:function(c){return svgHuerto(c,25,15,10,8);}, minutos:4,
+      qa:{enun:'¿Cómo se descompone correctamente esta figura en L?',
+        ops:['Rectángulo grande (25×15) menos rectángulo pequeño (10×8).','Rectángulo grande (25×15) más rectángulo pequeño (10×8).','Dos rectángulos iguales de 15×8.','Un triángulo de base 25 y altura 15.'],
+        correcta:0, exp:'La figura en L es un rectángulo grande al que le falta una esquina rectangular, por eso se resta.'},
+      qb:{enun:'Calcula el área del huerto (en m²).', resp:295, tol:0, exp:'25×15 = 375 m²; 10×8 = 80 m²; 375 − 80 = 295 m².'}
+    },
+    {
+      tema:'El biohuerto escolar',
+      contexto:'Una institución educativa de Cajamarca necesita un espacio con forma de trapecio para sembrar alfalfa. El lado paralelo mayor mide 24 m, el menor 12 m y la altura entre ambos es de 16 m.',
+      svg:function(c){return svgBiohuerto(c,12,24,16);}, minutos:5,
+      qa:{enun:'¿Qué fórmula corresponde a esta figura?',
+        ops:['Área = base × altura','Área = (Base + base) × altura ÷ 2','Área = lado × lado','Área = π × radio²'],
+        correcta:1, exp:'Es un trapecio, y el área de un trapecio se calcula con (B + b) × h ÷ 2.'},
+      qb:{enun:'Calcula el área del biohuerto (en m²).', resp:288, tol:0, exp:'(24+12)×16÷2 = 36×16÷2 = 576÷2 = 288 m².'}
+    },
+    {
+      tema:'El corral para cerdos',
+      contexto:'En una granja de Cajamarca se construirá un corral rectangular de 40 m por 20 m. En uno de los lados se dejará un espacio semicircular de 10 m de radio para el bebedero de los animales, que no forma parte del área útil del corral.',
+      svg:function(c){return svgCorral(c);}, minutos:5,
+      qa:{enun:'¿Cuál es la estrategia correcta para hallar el área útil del corral?',
+        ops:['Rectángulo (40×20) más el semicírculo del bebedero.','Rectángulo (40×20) menos el semicírculo del bebedero.','Solo el área del semicírculo del bebedero.','Perímetro del rectángulo menos el radio.'],
+        correcta:1, exp:'El bebedero no se puede usar para el corral, así que su área se resta del rectángulo.'},
+      qb:{enun:'Calcula el área útil aproximada (en m², usa π ≈ 3,14).', resp:643, tol:2, exp:'40×20 = 800 m²; semicírculo = (π×10²)÷2 ≈ 157 m²; 800 − 157 ≈ 643 m².'}
+    },
+    {
+      tema:'El letrero de la escuela',
+      contexto:'En el patio de una escuela de Cajamarca se colocará un letrero de madera. La figura completa mediría 28 m por 22 m, pero se le recorta un rectángulo de 10 m por 8 m para darle una forma particular.',
+      svg:function(c){return svgLetrero(c);}, minutos:4,
+      qa:{enun:'¿Qué operación permite hallar el área real del letrero?',
+        ops:['(28×22) + (10×8)','(28×22) − (10×8)','28×22×10×8','(28+22) − (10+8)'],
+        correcta:1, exp:'Como al rectángulo grande se le quita una parte rectangular, el área se resta.'},
+      qb:{enun:'Calcula el área del letrero (en m²).', resp:536, tol:0, exp:'28×22 = 616 m²; 10×8 = 80 m²; 616 − 80 = 536 m².'}
+    },
+    {
+      tema:'El campo de maíz',
+      contexto:'En una ladera de Cajamarca, una familia siembra maíz en un terreno con forma de paralelogramo. La base mide 30 m y la altura entre los lados paralelos es de 18 m.',
+      svg:function(c){return svgCampo(c);}, minutos:3,
+      qa:{enun:'¿Qué fórmula corresponde a un paralelogramo?',
+        ops:['Área = base × altura','Área = (B + b) × h ÷ 2','Área = lado²','Área = π × radio²'],
+        correcta:0, exp:'En un paralelogramo, el área es base por altura (la altura es la distancia perpendicular entre las bases).'},
+      qb:{enun:'Calcula el área del campo de maíz (en m²).', resp:540, tol:0, exp:'30×18 = 540 m².'}
+    },
+    {
+      tema:'El jardín de la plaza',
+      contexto:'En la plaza de un pueblo de Cajamarca se diseñará un jardín con forma de “casita”: un rectángulo de 20 m de base por 18 m de altura, coronado por un triángulo de la misma base (20 m) y 8 m de altura.',
+      svg:function(c){return svgJardin(c);}, minutos:5,
+      qa:{enun:'¿Cómo se calcula el área total del jardín?',
+        ops:['Área del rectángulo más área del triángulo.','Área del rectángulo menos área del triángulo.','Solo el área del triángulo.','Área del rectángulo dividida entre 2.'],
+        correcta:0, exp:'El jardín combina dos figuras que se suman: el rectángulo de la base y el triángulo de arriba.'},
+      qb:{enun:'Calcula el área del jardín (en m²).', resp:440, tol:0, exp:'Rectángulo: 20×18=360 m²; triángulo: (20×8)÷2=80 m²; 360+80=440 m².'}
+    },
+    {
+      tema:'El estanque de truchas',
+      contexto:'Cajamarca es conocida por sus criaderos de trucha. En uno de ellos se construirá un estanque rectangular de 24 m por 12 m, con una entrada de agua semicircular de 6 m de radio recortada en uno de los lados cortos.',
+      svg:function(c){return svgEstanque(c);}, minutos:5,
+      qa:{enun:'¿Qué operación calcula correctamente el área de agua del estanque?',
+        ops:['Rectángulo (24×12) más el semicírculo (radio 6).','Rectángulo (24×12) menos el semicírculo (radio 6).','Solo el semicírculo (radio 6).','Rectángulo (24×12) dividido entre el semicírculo.'],
+        correcta:1, exp:'La entrada semicircular no forma parte del área de agua útil, por eso se resta.'},
+      qb:{enun:'Calcula el área aproximada del estanque (en m², usa π ≈ 3,14).', resp:231.5, tol:1, exp:'24×12=288 m²; semicírculo=(π×6²)÷2≈56,5 m²; 288−56,5≈231,5 m².'}
+    },
+    {
+      tema:'El patio de la institución educativa',
+      contexto:'El patio de una institución educativa de Cajamarca tendrá una mesa de juegos. El patio completo mide 32 m por 16 m, pero se reserva un espacio rectangular de 12 m por 8 m para un jardín que no se cuenta como parte del patio de juegos.',
+      svg:function(c){return svgPatio(c,32,16,12,8);}, minutos:4,
+      qa:{enun:'¿Qué operación da el área disponible para juegos?',
+        ops:['(32×16) + (12×8)','(32×16) − (12×8)','32×16×12×8','(32−12) × (16−8)'],
+        correcta:1, exp:'El jardín no se usa para juegos, así que su área se resta del patio total.'},
+      qb:{enun:'Calcula el área disponible (en m²).', resp:416, tol:0, exp:'32×16=512 m²; 12×8=96 m²; 512−96=416 m².'}
+    },
+    {
+      tema:'El terreno agrícola familiar',
+      contexto:'Una familia del campo cajamarquino tiene un terreno con forma de trapecio para sembrar hortalizas. El lado paralelo mayor mide 28 m, el menor 14 m y la distancia entre ambos (altura) es de 12 m.',
+      svg:function(c){return svgTerreno(c,14,28,12);}, minutos:4,
+      qa:{enun:'¿Qué fórmula usarías para este terreno?',
+        ops:['Área = base × altura','Área = (B + b) × h ÷ 2','Área = diagonal × diagonal ÷ 2','Área = perímetro × altura'],
+        correcta:1, exp:'Es un trapecio: se suman las dos bases paralelas, se multiplican por la altura y se divide entre 2.'},
+      qb:{enun:'Calcula el área del terreno (en m²).', resp:252, tol:0, exp:'(28+14)×12÷2 = 42×12÷2 = 504÷2 = 252 m².'}
+    },
+    {
+      tema:'El corral de cuyes',
+      contexto:'Una familia de Cajamarca cría cuyes y necesita habilitar un espacio rectangular para ellos. El corral mide 26 m de base por 18 m de altura.',
+      svg:function(c){return svgRectSimple(c,26,18);}, minutos:3,
+      qa:{enun:'¿Qué fórmula corresponde a esta figura?',
+        ops:['Área = base × altura','Área = (B + b) × h ÷ 2','Área = π × radio²','Área = base × altura ÷ 2'],
+        correcta:0, exp:'Es un rectángulo: el área es base por altura.'},
+      qb:{enun:'Calcula el área del corral (en m²).', resp:468, tol:0, exp:'26×18 = 468 m².'}
+    },
+    {
+      tema:'El jardín de la plaza del pueblo',
+      contexto:'En la plaza de un pueblo de Cajamarca se quiere sembrar un jardín rectangular. La base mide 32 m y la altura (el ancho) mide 14 m.',
+      svg:function(c){return svgRectSimple(c,32,14);}, minutos:3,
+      qa:{enun:'¿Cuál es la estrategia correcta para hallar el área del jardín?',
+        ops:['Multiplicar la base por la altura.','Sumar la base más la altura.','Dividir la base entre la altura.','Multiplicar solo por 2 la base.'],
+        correcta:0, exp:'En un rectángulo, el área es base por altura.'},
+      qb:{enun:'Calcula el área del jardín (en m²).', resp:448, tol:0, exp:'32×14 = 448 m².'}
+    },
+    {
+      tema:'La grada del patio escolar',
+      contexto:'En el patio de una escuela de Cajamarca se construirá una grada con forma escalonada. La figura se puede dividir en dos rectángulos: uno de 12 m por 10 m y otro de 10 m por 10 m.',
+      svg:function(c){return svgHuerto(c,12,24,10,10);}, minutos:5,
+      qa:{enun:'¿Cómo se resuelve una figura compuesta como esta?',
+        ops:['Se divide en dos rectángulos y se suman sus áreas.','Se resta el área de un rectángulo al otro.','Se multiplican las dos áreas entre sí.','Se usa la fórmula del trapecio directamente.'],
+        correcta:0, exp:'Cuando una figura no es una forma básica, se divide en partes conocidas (aquí, dos rectángulos) y se suman.'},
+      qb:{enun:'Calcula el área total de la grada (en m²).', resp:220, tol:0, exp:'12×10 = 120 m²; 10×10 = 100 m²; 120+100 = 220 m².'}
+    },
+    {
+      tema:'La mesa de madera del taller comunal',
+      contexto:'En un taller de la comunidad de Cajamarca se construirá la base de una mesa de trabajo rectangular de 26 m por 15 m.',
+      svg:function(c){return svgRectSimple(c,26,15);}, minutos:3,
+      qa:{enun:'¿Qué operación corresponde a esta figura rectangular?',
+        ops:['base × altura','(base + altura) ÷ 2','base × altura ÷ 2','2 × (base + altura)'],
+        correcta:0, exp:'El área de un rectángulo se calcula multiplicando su base por su altura.'},
+      qb:{enun:'Calcula el área de la base de la mesa (en m²).', resp:390, tol:0, exp:'26×15 = 390 m².'}
+    },
+    {
+      tema:'El biohuerto de lechugas',
+      contexto:'Una institución educativa de Cajamarca sembrará lechugas en un terreno con forma de trapecio. El lado paralelo mayor mide 40 m, el menor 8 m y la altura entre ambos es de 12 m.',
+      svg:function(c){return svgBiohuerto(c,8,40,12);}, minutos:5,
+      qa:{enun:'¿Qué fórmula corresponde a esta figura?',
+        ops:['Área = (Base + base) × altura ÷ 2','Área = base × altura','Área = lado²','Área = π × radio²'],
+        correcta:0, exp:'Es un trapecio: se suman las dos bases paralelas, se multiplican por la altura y se divide entre 2.'},
+      qb:{enun:'Calcula el área del terreno (en m²).', resp:288, tol:0, exp:'(40+8)×12÷2 = 48×12÷2 = 576÷2 = 288 m².'}
+    },
+    {
+      tema:'El cartel de la entrada del colegio',
+      contexto:'En la entrada de un colegio de Cajamarca se colocará un cartel informativo rectangular de 30 m de base por 20 m de altura.',
+      svg:function(c){return svgRectSimple(c,30,20);}, minutos:3,
+      qa:{enun:'¿Qué fórmula corresponde a esta figura?',
+        ops:['Área = base × altura','Área = (B + b) × h ÷ 2','Área = π × radio²','Área = diagonal × diagonal ÷ 2'],
+        correcta:0, exp:'Es un rectángulo, así que su área es base por altura.'},
+      qb:{enun:'Calcula el área del cartel (en m²).', resp:600, tol:0, exp:'30×20 = 600 m².'}
+    },
+    {
+      tema:'El depósito de herramientas de la chacra',
+      contexto:'En una chacra de Cajamarca se construirá un depósito de herramientas con forma de trapecio. El lado paralelo mayor mide 36 m, el menor 16 m y la altura entre ambos es de 18 m.',
+      svg:function(c){return svgTerreno(c,16,36,18);}, minutos:5,
+      qa:{enun:'¿Qué fórmula usarías para este depósito?',
+        ops:['Área = (B + b) × h ÷ 2','Área = base × altura','Área = lado × lado','Área = perímetro × altura'],
+        correcta:0, exp:'Es un trapecio: se suman las bases paralelas, se multiplican por la altura y se divide entre 2.'},
+      qb:{enun:'Calcula el área del depósito (en m²).', resp:468, tol:0, exp:'(36+16)×18÷2 = 52×18÷2 = 936÷2 = 468 m².'}
+    },
+    {
+      tema:'El terreno escalonado para sembrar papa',
+      contexto:'Una familia de Cajamarca tiene un terreno escalonado para sembrar papa. La figura se puede dividir en dos rectángulos: uno de 24 m por 14 m y otro de 10 m por 10 m.',
+      svg:function(c){return svgPatio(c,34,26,14,10);}, minutos:5,
+      qa:{enun:'¿Cómo se resuelve el área de este terreno escalonado?',
+        ops:['Se divide en dos rectángulos y se suman sus áreas.','Se resta un rectángulo del otro.','Se usa la fórmula del trapecio.','Se usa la fórmula del círculo.'],
+        correcta:0, exp:'La figura escalonada se descompone en dos rectángulos conocidos y luego se suman sus áreas.'},
+      qb:{enun:'Calcula el área total del terreno (en m²).', resp:436, tol:0, exp:'24×14 = 336 m²; 10×10 = 100 m²; 336+100 = 436 m².'}
+    },
+    {
+      tema:'El kiosco de la plaza de Cajamarca',
+      contexto:'En una plaza de Cajamarca se construirá un kiosco con forma de hexágono regular. Cada lado mide 24 m y la apotema (distancia del centro al punto medio de un lado) mide 11 m.',
+      svg:function(c){return svgHexagono(c,24,11);}, minutos:6,
+      qa:{enun:'¿Qué fórmula corresponde a un hexágono regular?',
+        ops:['Área = (6 × lado × apotema) ÷ 2','Área = base × altura','Área = (B + b) × h ÷ 2','Área = π × radio²'],
+        correcta:0, exp:'El área de un polígono regular es (número de lados × lado × apotema) ÷ 2; aquí son 6 lados.'},
+      qb:{enun:'Calcula el área del kiosco (en m²).', resp:792, tol:0, exp:'(6×24×11)÷2 = 1584÷2 = 792 m².'}
+    },
+    {
+      tema:'El terreno rural para pastos',
+      contexto:'En una zona rural de Cajamarca se cercará un terreno rectangular para pastos. La base mide 35 m y la altura mide 25 m.',
+      svg:function(c){return svgRectSimple(c,35,25);}, minutos:3,
+      qa:{enun:'¿Qué operación calcula el área de este terreno?',
+        ops:['base × altura','(base + altura) × 2','base × altura ÷ 2','base ÷ altura'],
+        correcta:0, exp:'Es un rectángulo, así que el área es base por altura.'},
+      qb:{enun:'Calcula el área del terreno (en m²).', resp:875, tol:0, exp:'35×25 = 875 m².'}
+    }
+  ];
+
+  var STATE = EJERCICIOS.map(function(){ return {
+    running:false, remaining:0, total:0, interval:null, timeUp:false,
+    checked:false, aOk:null, bOk:null, timeUsed:0, startedAt:null
+  };});
+
+  function fmt(s){
+    s = Math.max(0, Math.round(s));
+    var m = Math.floor(s/60), r = s%60;
+    return (m<10?'0':'')+m+':'+(r<10?'0':'')+r;
+  }
+
+  var cont = document.getElementById('ejercicios');
+  var TOTAL_SLIDES = EJERCICIOS.length + 1; // + slide de resultados
+  var current = 0;
+
+  EJERCICIOS.forEach(function(ej, i){
+    var col = colorFor(i);
+    var cssColor = 'var(--'+col.color+')';
+
+    var slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.id = 'slide-'+i;
+
+    var card = document.createElement('div');
+    card.className = 'ejercicio';
+    card.innerHTML =
+      '<div class="ej-head">'+
+        '<div class="ej-num" style="background:'+cssColor+'">'+(i+1)+'</div>'+
+        '<div>'+
+          '<h3>'+ej.tema+'</h3>'+
+          '<span class="ej-tag" style="background:'+col.bg+';color:'+cssColor+'">Sugerido: '+ej.minutos+' min</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="ej-body">'+
+        '<p class="contexto">'+ej.contexto+'</p>'+
+        '<div class="diagrama-wrap">'+ej.svg(cssColor)+'</div>'+
+        '<div class="timer-box" id="timer-'+i+'">'+
+          '<div class="timer-display" id="timer-disp-'+i+'">00:00</div>'+
+          '<div class="timer-controls">'+
+            '<label for="min-'+i+'">Minutos de los que dispongo:</label>'+
+            '<input type="number" id="min-'+i+'" min="1" max="60" value="'+ej.minutos+'">'+
+            '<button class="btn btn-primary" id="start-'+i+'">Iniciar</button>'+
+            '<button class="btn" id="pause-'+i+'" disabled>Pausar</button>'+
+            '<button class="btn" id="reset-'+i+'">Reiniciar</button>'+
+          '</div>'+
+          '<span class="time-up-note" id="timeupnote-'+i+'" style="display:none;">¡Tiempo agotado! Puedes seguir, pero anótalo.</span>'+
+        '</div>'+
+        '<div class="pregunta">'+
+          '<p class="enun">a) '+ej.qa.enun+'</p>'+
+          '<div class="opciones" id="opciones-'+i+'">'+
+            ej.qa.ops.map(function(op, oi){
+              return '<label class="opcion"><input type="radio" name="qa-'+i+'" value="'+oi+'">'+op+'</label>';
+            }).join('')+
+          '</div>'+
+        '</div>'+
+        '<div class="pregunta">'+
+          '<p class="enun">b) '+ej.qb.enun+'</p>'+
+          '<div class="respuesta-num">'+
+            '<input type="number" step="0.1" id="qb-'+i+'" placeholder="Área">'+
+            '<span>m²</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="verificar-row">'+
+          '<button class="btn btn-primary" id="check-'+i+'">Comprobar</button>'+
+        '</div>'+
+        '<div class="feedback" id="feedback-'+i+'"></div>'+
+        '<div class="slide-nav-inline">'+
+          '<button class="btn" id="prev-inline-'+i+'">◀ Anterior</button>'+
+          '<button class="btn btn-primary" id="next-inline-'+i+'">'+(i===EJERCICIOS.length-1?'Ver resultados ▶':'Siguiente ejercicio ▶')+'</button>'+
+        '</div>'+
+      '</div>';
+    slide.appendChild(card);
+    cont.appendChild(slide);
+
+    var st = STATE[i];
+    var dispEl = document.getElementById('timer-disp-'+i);
+    var boxEl = document.getElementById('timer-'+i);
+    var minInput = document.getElementById('min-'+i);
+    var startBtn = document.getElementById('start-'+i);
+    var pauseBtn = document.getElementById('pause-'+i);
+    var resetBtn = document.getElementById('reset-'+i);
+    var noteEl = document.getElementById('timeupnote-'+i);
+
+    function tick(){
+      st.remaining -= 1;
+      st.timeUsed += 1;
+      if(st.remaining <= 0){
+        st.remaining = 0;
+        st.timeUp = true;
+        boxEl.classList.add('time-up');
+        noteEl.style.display = 'inline';
+        clearInterval(st.interval);
+        st.running = false;
+        pauseBtn.disabled = true;
+        startBtn.disabled = true;
+      }
+      dispEl.textContent = fmt(st.remaining);
+    }
+
+    startBtn.addEventListener('click', function(){
+      if(st.running) return;
+      if(!st.startedAt){
+        var mins = parseFloat(minInput.value) || ej.minutos;
+        st.total = mins*60;
+        st.remaining = mins*60;
+        st.startedAt = Date.now();
+        minInput.disabled = true;
+      }
+      st.running = true;
+      boxEl.classList.remove('time-up');
+      noteEl.style.display = 'none';
+      startBtn.textContent = 'Reanudar';
+      pauseBtn.disabled = false;
+      startBtn.disabled = true;
+      st.interval = setInterval(tick, 1000);
+    });
+
+    pauseBtn.addEventListener('click', function(){
+      clearInterval(st.interval);
+      st.running = false;
+      pauseBtn.disabled = true;
+      startBtn.disabled = false;
+    });
+
+    resetBtn.addEventListener('click', function(){
+      clearInterval(st.interval);
+      st.running = false; st.timeUp = false; st.startedAt = null; st.timeUsed = 0;
+      st.remaining = 0; st.total = 0;
+      dispEl.textContent = '00:00';
+      boxEl.classList.remove('time-up');
+      noteEl.style.display = 'none';
+      minInput.disabled = false;
+      startBtn.disabled = false; startBtn.textContent = 'Iniciar';
+      pauseBtn.disabled = true;
+    });
+
+    document.getElementById('check-'+i).addEventListener('click', function(){
+      var sel = document.querySelector('input[name="qa-'+i+'"]:checked');
+      var aVal = sel ? parseInt(sel.value,10) : null;
+      var bInput = document.getElementById('qb-'+i);
+      var bVal = parseFloat(bInput.value);
+
+      var aOk = (aVal === ej.qa.correcta);
+      var bOk = (!isNaN(bVal) && Math.abs(bVal - ej.qb.resp) <= ej.qb.tol);
+
+      st.checked = true; st.aOk = aOk; st.bOk = bOk;
+
+      var fb = document.getElementById('feedback-'+i);
+      fb.className = 'feedback show ' + ((aOk && bOk) ? 'ok' : 'bad');
+      fb.innerHTML =
+        '<div class="fila"><b>'+(aOk?'✓':'✗')+'</b><span>Estrategia: '+(aOk?'correcta.':'revisa la opción correcta.')+'</span></div>'+
+        '<div class="fila"><b>'+(bOk?'✓':'✗')+'</b><span>Cálculo: '+(bOk?'correcto ('+ej.qb.resp+' m²).':'la respuesta esperada es '+ej.qb.resp+' m².')+'</span></div>'+
+        '<div class="explicacion">'+ej.qa.exp+' '+ej.qb.exp+'</div>';
+
+      actualizarProgreso();
+    });
+
+    document.getElementById('prev-inline-'+i).addEventListener('click', function(){ goTo(i-1); });
+    document.getElementById('next-inline-'+i).addEventListener('click', function(){ goTo(i+1); });
+  });
+
+  // ---------- Navegación paso a paso ----------
+  var navPrev = document.getElementById('nav-prev');
+  var navNext = document.getElementById('nav-next');
+  var navLabel = document.getElementById('nav-label');
+  var navDots = document.getElementById('nav-dots');
+
+  for(var d=0; d<TOTAL_SLIDES; d++){
+    var dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', d < EJERCICIOS.length ? ('Ir al ejercicio '+(d+1)) : 'Ir a resultados');
+    dot.addEventListener('click', (function(idx){ return function(){ goTo(idx); }; })(d));
+    navDots.appendChild(dot);
+  }
+
+  function goTo(idx){
+    if(idx < 0) idx = 0;
+    if(idx > TOTAL_SLIDES-1) idx = TOTAL_SLIDES-1;
+    current = idx;
+    for(var i=0;i<EJERCICIOS.length;i++){
+      document.getElementById('slide-'+i).classList.toggle('active', i===current);
+    }
+    document.getElementById('slide-resultado').classList.toggle('active', current===EJERCICIOS.length);
+
+    if(current < EJERCICIOS.length){
+      navLabel.textContent = 'Ejercicio '+(current+1)+' de '+EJERCICIOS.length;
+    } else {
+      navLabel.textContent = 'Resultados finales';
+      actualizarResultado();
+    }
+    navPrev.disabled = (current===0);
+    navNext.textContent = (current===TOTAL_SLIDES-1) ? 'Resultados ▶' : (current===EJERCICIOS.length-1 ? 'Ver resultados ▶' : 'Siguiente ▶');
+
+    var dots = navDots.querySelectorAll('.nav-dot');
+    dots.forEach(function(dot, i){
+      dot.classList.toggle('current', i===current);
+      dot.classList.toggle('done', i<EJERCICIOS.length && STATE[i] && STATE[i].checked);
+    });
+
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  navPrev.addEventListener('click', function(){ goTo(current-1); });
+  navNext.addEventListener('click', function(){ goTo(current+1); });
+
+  function actualizarProgreso(){
+    var dots = navDots.querySelectorAll('.nav-dot');
+    dots.forEach(function(dot, i){
+      dot.classList.toggle('done', i<EJERCICIOS.length && STATE[i] && STATE[i].checked);
+    });
+    actualizarResultado();
+  }
+
+  function actualizarResultado(){
+    var comprobados = STATE.filter(function(s){ return s.checked; });
+    var puntos = 0;
+    STATE.forEach(function(s){ if(s.aOk) puntos++; if(s.bOk) puntos++; });
+
+    document.getElementById('puntaje-final').textContent = puntos+' / '+(STATE.length*2);
+
+    var msg;
+    if(comprobados.length < STATE.length){
+      msg = 'Llevas '+comprobados.length+' de '+STATE.length+' ejercicios comprobados. Sigue resolviendo para completar tu puntaje.';
+    } else if(puntos >= Math.round(STATE.length*2*0.85)){
+      msg = 'Nivel avanzado: dominas la interpretación y el cálculo de áreas compuestas. ¡Sigue así!';
+    } else if(puntos >= Math.round(STATE.length*2*0.6)){
+      msg = 'Nivel intermedio: entiendes las estrategias, pero conviene repasar algunos cálculos.';
+    } else {
+      msg = 'Nivel inicial: vuelve a leer las explicaciones de cada ejercicio y repite los que fallaste.';
+    }
+    document.getElementById('mensaje-final').textContent = msg;
+
+    if(comprobados.length > 0){
+      var tabla = document.getElementById('tabla-resumen');
+      tabla.style.display = 'block';
+      var body = document.getElementById('tabla-resumen-body');
+      body.innerHTML = STATE.map(function(s, i){
+        if(!s.checked) return '';
+        return '<tr><td>'+(i+1)+'</td><td>'+EJERCICIOS[i].tema+'</td><td>'+(s.aOk?'✓':'✗')+'</td><td>'+(s.bOk?'✓':'✗')+'</td><td>'+fmt(s.timeUsed)+'</td></tr>';
+      }).join('');
+    }
+
+    var btnPdf = document.getElementById('btn-pdf');
+    var todosListos = comprobados.length === STATE.length;
+    btnPdf.disabled = !todosListos;
+    btnPdf.title = todosListos ? '' : 'Comprueba los '+STATE.length+' ejercicios para habilitar el PDF';
+  }
+
+  document.getElementById('btn-recalcular').addEventListener('click', actualizarResultado);
+
+  // ---------- Generar PDF de resultados ----------
+  function datosFicha(){
+    return {
+      nombre: (document.getElementById('f-nombre').value || 'Sin nombre').trim(),
+      grado: (document.getElementById('f-grado').value || '—').trim(),
+      ie: (document.getElementById('f-ie').value || '—').trim()
+    };
+  }
+
+  function construirPDF(){
+    if(!window.jspdf || !window.jspdf.jsPDF){
+      throw new Error('no-jspdf');
+    }
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({unit:'pt', format:'a4'});
+    var ficha = datosFicha();
+    var puntos = 0;
+    STATE.forEach(function(s){ if(s.aOk) puntos++; if(s.bOk) puntos++; });
+    var fecha = new Date().toLocaleDateString('es-PE');
+
+    var x = 48, y = 56;
+    doc.setFont('helvetica','bold'); doc.setFontSize(16);
+    doc.text('Simulacro PISA - Áreas de terrenos de Cajamarca', x, y);
+    y += 22;
+    doc.setFont('helvetica','normal'); doc.setFontSize(10);
+    doc.text('Hoja de resultados · Elaborado por el profesor Walter Rodrigo Arribasplata Chavarry', x, y);
+    y += 26;
+
+    doc.setFontSize(11);
+    doc.text('Estudiante: ' + ficha.nombre, x, y); y += 16;
+    doc.text('Grado y sección: ' + ficha.grado, x, y); y += 16;
+    doc.text('Institución educativa: ' + ficha.ie, x, y); y += 16;
+    doc.text('Fecha: ' + fecha, x, y); y += 26;
+
+    doc.setFont('helvetica','bold'); doc.setFontSize(13);
+    doc.text('Puntaje total: ' + puntos + ' / ' + (STATE.length*2), x, y);
+    y += 24;
+
+    doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    doc.text('N.°', x, y);
+    doc.text('Ejercicio', x+30, y);
+    doc.text('Estrategia', x+330, y);
+    doc.text('Cálculo', x+400, y);
+    doc.text('Tiempo usado', x+460, y);
+    y += 6;
+    doc.setLineWidth(0.5);
+    doc.line(x, y, 547, y);
+    y += 14;
+
+    doc.setFont('helvetica','normal');
+    STATE.forEach(function(s, i){
+      var ej = EJERCICIOS[i];
+      doc.text(String(i+1), x, y);
+      var tema = ej.tema.length > 48 ? ej.tema.slice(0,45)+'...' : ej.tema;
+      doc.text(tema, x+30, y);
+      doc.text(s.aOk ? 'Correcta' : 'Revisar', x+330, y);
+      doc.text(s.bOk ? 'Correcto' : 'Revisar', x+400, y);
+      doc.text(fmt(s.timeUsed), x+460, y);
+      y += 18;
+      if(y > 780 && i < STATE.length-1){
+        doc.addPage();
+        y = 56;
+      }
+    });
+
+    y += 14;
+    doc.setFont('helvetica','italic'); doc.setFontSize(9);
+    var msgLevel = puntos>=Math.round(STATE.length*2*0.85) ? 'Nivel avanzado en interpretación y cálculo de áreas compuestas.' :
+                   puntos>=Math.round(STATE.length*2*0.6) ? 'Nivel intermedio: conviene repasar algunos cálculos.' :
+                   'Nivel inicial: conviene repasar las explicaciones de cada ejercicio.';
+    var lineas = doc.splitTextToSize(msgLevel, 499);
+    doc.text(lineas, x, y);
+
+    return doc;
+  }
+
+  document.getElementById('btn-pdf').addEventListener('click', function(){
+    var note = document.getElementById('pdf-note');
+    note.style.display = 'block';
+    note.textContent = 'Generando PDF...';
+    try{
+      var doc = construirPDF();
+      var ficha = datosFicha();
+      var nombreArchivo = 'resultados-' + (ficha.nombre || 'estudiante').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') + '.pdf';
+
+      (async function(){
+        try{
+          var downloads = (window.claude && typeof window.claude.use === 'function')
+            ? await window.claude.use('downloads')
+            : null;
+
+          if(downloads){
+            var blob = doc.output('blob');
+            var resultado = await downloads.save({filename: nombreArchivo, data: blob});
+            note.textContent = resultado && resultado.status === 'saved'
+              ? 'PDF guardado correctamente.'
+              : 'PDF enviado al destino elegido.';
+          } else {
+            doc.save(nombreArchivo);
+            note.textContent = 'Descargando PDF...';
+          }
+        } catch(err){
+          if(err && err.code === 'declined'){
+            note.textContent = 'Descarga cancelada.';
+          } else {
+            try{ doc.save(nombreArchivo); note.textContent = 'Descargando PDF...'; }
+            catch(e2){ note.textContent = 'No se pudo generar el PDF en este entorno.'; }
+          }
+        }
+      })();
+    } catch(e){
+      note.textContent = 'No se pudo generar el PDF: falta el componente de exportación.';
+    }
+  });
+
+  goTo(0);
+
+})();
+</script>
+</body>
+</html>
